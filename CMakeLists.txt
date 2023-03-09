@@ -1,24 +1,10 @@
 cmake_minimum_required(VERSION 3.5)
 
-# THIS IS QUICL AND DIRTY ONLY FOR GLFW and OPRNGL3
-
+# THIS IS QUICL AND DIRTY ONLY FOR GLFW and
 project(imgui CXX)
 
-set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
-include(BuildExternalProject)
-
-#BuildExternalProject(
-#    NAME glfw
-#    LIB_NAME glfw_target
-#    GIT_REPO https://github.com/glfw/glfw.git
-#    GIT_TAG 3.3.8
-#    INSTALL_PATH ${PROJECT_SOURCE_DIR}/external
-#    BUILD_TYPE Release
-#    ARCHITECTURE x64
-#)
 include(FetchContent)
-FetchContent_Declare(glfw GIT_REPOSITORY https://github.com/glfw/glfw) 
-FetchContent_MakeAvailable(glfw)
+FetchContent_Declare(glfw GIT_REPOSITORY https://github.com/glfw/glfw)
 
 file(GLOB IMGUI_SOURCES
     imgui.cpp
@@ -44,11 +30,11 @@ file(GLOB IMGUI_HEADERS
 
 add_library(imgui STATIC ${IMGUI_SOURCES})
 
-target_include_directories(imgui 
-    PRIVATE 
-        ./
+target_include_directories(imgui
+    PRIVATE
         ${glfw_INCLUDEDIR}
     PUBLIC
+        ./
         ${IMGUI_HEADERS}
 )
 
@@ -57,7 +43,10 @@ target_link_libraries(imgui
         glfw
 )
 
-install(DIRECTORY . DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-        FILE_SET ${IMGUI_BINARY_DIR}/src/imguiConfig.cmake"
-        "${IMGUI_BINARY_DIR}/src/imguiConfigVersion.cmake"
-        DESTINATION "${IMGUI_CONFIG_PATH}")
+install(TARGETS imgui
+        DESTINATION lib
+)
+
+install(FILES ${IMGUI_HEADERS} # source directory
+    DESTINATION include/imgui # target directory
+)
