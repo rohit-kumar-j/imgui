@@ -4,6 +4,19 @@ cmake_minimum_required(VERSION 3.5)
 
 project(imgui CXX)
 
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
+include(BuildExternalProject)
+
+BuildExternalProject(
+    NAME glfw
+    LIB_NAME glfw_target
+    GIT_REPO https://github.com/glfw/glfw.git
+    GIT_TAG 3.3.8
+    INSTALL_PATH ${PROJECT_SOURCE_DIR}/external
+    BUILD_TYPE Release
+    ARCHITECTURE x64
+)
+
 file(GLOB IMGUI_SOURCES
     imconfig.h
     imgui.cpp
@@ -31,6 +44,6 @@ target_include_directories(imgui
 )
 
 target_link_libraries(imgui
-    PUBLIC
+    PRIVATE
     glfw_target
 )
