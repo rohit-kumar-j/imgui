@@ -7,15 +7,18 @@ project(imgui CXX)
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 include(BuildExternalProject)
 
-BuildExternalProject(
-    NAME glfw
-    LIB_NAME glfw_target
-    GIT_REPO https://github.com/glfw/glfw.git
-    GIT_TAG 3.3.8
-    INSTALL_PATH ${PROJECT_SOURCE_DIR}/external
-    BUILD_TYPE Release
-    ARCHITECTURE x64
-)
+#BuildExternalProject(
+#    NAME glfw
+#    LIB_NAME glfw_target
+#    GIT_REPO https://github.com/glfw/glfw.git
+#    GIT_TAG 3.3.8
+#    INSTALL_PATH ${PROJECT_SOURCE_DIR}/external
+#    BUILD_TYPE Release
+#    ARCHITECTURE x64
+#)
+
+FetchContent_Declare(glfw GIT_REPOSITORY https://github.com/glfw/glfw) 
+FetchContent_MakeAvailable(glfw)
 
 file(GLOB IMGUI_SOURCES
     imconfig.h
@@ -41,10 +44,10 @@ add_library(imgui STATIC ${IMGUI_SOURCES})
 target_include_directories(imgui 
   PUBLIC 
     ./
-    ${glfw_target_INCLUDE_DIRS}
+    ${glfw_INCLUDE_DIRS}
 )
 
 target_link_libraries(imgui
     PRIVATE
-    glfw_target
+    glfw
 )
