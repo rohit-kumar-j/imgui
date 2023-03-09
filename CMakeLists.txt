@@ -21,33 +21,38 @@ FetchContent_Declare(glfw GIT_REPOSITORY https://github.com/glfw/glfw)
 FetchContent_MakeAvailable(glfw)
 
 file(GLOB IMGUI_SOURCES
-    imconfig.h
     imgui.cpp
-    imgui.h
     imgui_demo.cpp
     imgui_draw.cpp
-    imgui_internal.h
     imgui_tables.cpp
     imgui_widgets.cpp
+    backends/imgui_impl_glfw.cpp
+    backends/imgui_impl_opengl3.cpp
+    backends/imgui_impl_opengl3_loader.cpp
+)
+
+file(GLOB IMGUI_HEADERS
+    imconfig.h
+    imgui.h
+    imgui_internal.h
     imstb_rectpack.h
     imstb_textedit.h
     imstb_truetype.h
     backends/imgui_impl_glfw.h
-    backends/imgui_impl_glfw.cpp
     backends/imgui_impl_opengl3.h
-    backends/imgui_impl_opengl3.cpp
-    backends/imgui_impl_opengl3_loader.cpp
 )
 
 add_library(imgui STATIC ${IMGUI_SOURCES})
 
 target_include_directories(imgui 
-  PUBLIC 
-    ./
-    ${glfw_INCLUDE_DIRS}
+    PRIVATE 
+        ./
+        ${glfw_INCLUDE_DIRS}
+    PUBLIC
+        ${IMGUI_HEADERS}
 )
 
 target_link_libraries(imgui
     PRIVATE
-    glfw
+        glfw
 )
