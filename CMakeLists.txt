@@ -5,13 +5,13 @@ cmake_minimum_required(VERSION 3.5)
 project(imgui CXX)
 
 file(GLOB_RECURSE IMGUI_SOURCES
-  ${PROJECT_SOURCE_DIR}/*.cpp
-  ${PROJECT_SOURCE_DIR}/*.h
-  ${PROJECT_SOURCE_DIR}/backends/imgui_impl_glfw.h
-  ${PROJECT_SOURCE_DIR}/backends/imgui_impl_glfw.cpp
-  ${PROJECT_SOURCE_DIR}/backends/imgui_impl_opengl3.h
-  ${PROJECT_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp
-  ${PROJECT_SOURCE_DIR}/backends/imgui_impl_opengl3_loader.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/*.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/backends/imgui_impl_glfw.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/backends/imgui_impl_glfw.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/backends/imgui_impl_opengl3.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/backends/imgui_impl_opengl3_loader.cpp
 )
 
 include_directories(./)
@@ -27,4 +27,9 @@ target_include_directories(imgui_target
   PUBLIC 
     ./
     backends
+)
+
+target_link_libraries(imgui_target 
+    PRIVATE
+      glfw
 )
