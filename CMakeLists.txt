@@ -14,10 +14,9 @@ file(GLOB_RECURSE IMGUI_SOURCES
   ${PROJECT_SOURCE_DIR}/backends/imgui_impl_opengl3_loader.cpp
 )
 
-add_library(imgui_target 
-  STATIC 
-  ${IMGUI_SOURCES}
-)
+include_directories(./)
+
+add_library(imgui_target ${IMGUI_SOURCES})
 
 target_sources(imgui_target 
   PUBLIC 
@@ -26,6 +25,6 @@ target_sources(imgui_target
 
 target_include_directories(imgui_target 
   PUBLIC 
-    . 
+    ./
     backends
 )
