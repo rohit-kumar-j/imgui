@@ -23,7 +23,7 @@ file(GLOB IMGUI_SOURCES
     backends/imgui_impl_opengl3_loader.cpp
 )
 
-add_library(imgui ${IMGUI_SOURCES})
+add_library(imgui STATIC ${IMGUI_SOURCES})
 
 target_include_directories(imgui 
   PUBLIC 
