@@ -1,5 +1,5 @@
 version: "1"
 rules:
-  - base: master
-    upstream: ocornut:master    # change `wei` to the owner of upstream repo
+  - base: docking
+    upstream: ocornut:docking    # change `wei` to the owner of upstream repo
     mergeMethod: merge
