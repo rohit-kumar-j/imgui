@@ -47,7 +47,7 @@ add_library(imgui STATIC ${IMGUI_SOURCES})
 target_include_directories(imgui 
     PRIVATE 
         ./
-        ${glfw_INCLUDE_DIRS}
+        ${glfw_INCLUDEDIR}
     PUBLIC
         ${IMGUI_HEADERS}
 )
@@ -56,3 +56,8 @@ target_link_libraries(imgui
     PRIVATE
         glfw
 )
+
+install(DIRECTORY . DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILE_SET ${IMGUI_BINARY_DIR}/src/imguiConfig.cmake"
+        "${IMGUI_BINARY_DIR}/src/imguiConfigVersion.cmake"
+        DESTINATION "${IMGUI_CONFIG_PATH}")
