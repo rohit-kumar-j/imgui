@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.5)
 
 # quick and dirty cmake
 project(imgui CXX)
-
 include(FetchContent)
 FetchContent_Declare(glfw GIT_REPOSITORY https://github.com/glfw/glfw)
 FetchContent_GetProperties(glfw)
@@ -72,5 +71,5 @@ target_link_libraries(imgui
 )
 
 install(TARGETS imgui EXPORT imgui DESTINATION lib)
-install(FILES ${IMPLOT_HEADERS} DESTINATION include)
-install(FILES ${IMGUI_HEADERS} DESTINATION include)
+install(FILES ${IMPLOT_HEADERS} DESTINATION include/imgui)
+install(FILES ${IMGUI_HEADERS} DESTINATION include/imgui)
