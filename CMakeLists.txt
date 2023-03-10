@@ -79,43 +79,62 @@ file(GLOB IMGUI_HEADERS
     imgui_impl_glfw.h
     imgui_impl_opengl3.h
 )
-add_library(imgui_final STATIC ${IMGUI_SOURCES})
-add_library(imgui INTERFACE IMPORTED GLOBAL ${IMPLOT_SOURCES} implot_utility)
+add_library(imgui STATIC ${IMGUI_SOURCES})
+add_library(imgui_intermediate INTERFACE IMPORTED GLOBAL ${IMPLOT_SOURCES} implot_utility)
 
 # target_include_directories(${_ARGS_LIB_NAME} INTERFACE .)
 # target_link_libraries(${_ARGS_LIB_NAME} INTERFACE ./lib)
-add_dependencies(imgui_final imgui)
-add_dependencies(imgui implot_utility)
+add_dependencies(imgui imgui_intermediate)
+add_dependencies(imgui_intermediate implot_utility)
 
-target_include_directories(imgui_final
+target_include_directories(imgui
     PRIVATE
         ./
         ${glfw_INCLUDEDIR}
     PUBLIC
         ${IMGUI_HEADERS}
+        $<INSTALL_INTERFACE:${IMGUI_HEADERS}/>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/>
 )
-target_include_directories(imgui
+target_include_directories(imgui_intermediate
     INTERFACE
         ./
         ${IMPLOT_HEADERS}
+        $<INSTALL_INTERFACE:${IMPLOT_HEADERS}/>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/>
 )
 
-target_link_libraries(imgui_final
+target_link_libraries(imgui
     PRIVATE
         glfw
 )
-target_link_libraries(imgui
+target_link_libraries(imgui_intermediate
     INTERFACE
         ${CMAKE_INSTALL_LIBDIR}/lib/*.lib
 )
 
-install(TARGETS imgui_final
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}
+install(
+    TARGETS imgui
+    EXPORT imgui
+    RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT runtime
+    LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT runtime
+    ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT dev
+    PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}" COMPONENT dev
+)
+install(
+    FILES ${IMPLOT_HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+install(
+    FILES ${IMGUI_HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 
-# install(FILES ${IMGUI_HEADERS} # source directory
-# DESTINATION external/include/imgui # target directory
+# install(TARGETS imgui
+# DESTINATION ${CMAKE_INSTALL_LIBDIR}
 # )
+
+# # install(FILES ${IMGUI_HEADERS} # source directory
+# # DESTINATION external/include/imgui_intermediate# target directory
+# # )
 install(FILES ${IMPLOT_HEADERS} # source directory
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
