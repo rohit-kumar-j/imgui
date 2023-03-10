@@ -106,7 +106,7 @@ target_link_libraries(imgui
         glfw
 )
 
-install(TARGET imgui DESTINATION lib)
+install(EXPORT imgui DESTINATION lib)
 install(FILES ${IMPLOT_HEADERS} DESTINATION include)
 install(FILES ${IMGUI_HEADERS} DESTINATION include)
 
