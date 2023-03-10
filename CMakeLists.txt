@@ -42,13 +42,13 @@ ExternalProject_Get_Property(implot_utility SOURCE_DIR)
 message("Source dir of myExtProj = ${SOURCE_DIR}")
 
 set(IMPLOT_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/implot.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/implot_demo.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/implot_items.cpp
+    "${CMAKE_CURRENT_SOURCE_DIR}/implot.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/implot_demo.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/implot_items.cpp"
 )
 set(IMPLOT_HEADERS
-    ${CMAKE_CURRENT_SOURCE_DIR}/implot.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/implot_internal.h
+    "${CMAKE_CURRENT_SOURCE_DIR}/implot.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/implot_internal.h"
 )
 
 execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/backends/imgui_impl_glfw.cpp ${CMAKE_CURRENT_SOURCE_DIR})
@@ -106,15 +106,19 @@ target_link_libraries(imgui_final
 )
 target_link_libraries(imgui
     INTERFACE
-        ${CMAKE_CURRENT_SOURCE_DIR}/external/lib/*.lib
+        ${CMAKE_INSTALL_LIBDIR}/lib/*.lib
 )
 
 install(TARGETS imgui_final
-        DESTINATION external/lib
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}
+)
+
+# install(FILES ${IMGUI_HEADERS} # source directory
+# DESTINATION external/include/imgui # target directory
+# )
+install(FILES ${IMPLOT_HEADERS} # source directory
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 install(FILES ${IMGUI_HEADERS} # source directory
-    DESTINATION external/include/imgui # target directory
-)
-install(FILES ${IMPLOT_HEADERS} # source directory
-    DESTINATION external/include/imgui # target directory
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} # target directory
 )
