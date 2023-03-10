@@ -108,21 +108,22 @@ target_link_libraries(imgui
     PRIVATE
         glfw
 )
-target_link_libraries(imgui_intermediate
-    INTERFACE
-        ${CMAKE_INSTALL_LIBDIR}/lib/*.lib
-)
 
+# target_link_libraries(imgui_intermediate
+# INTERFACE
+# ${CMAKE_INSTALL_LIBDIR}/lib/*.lib
+# )
 install(
-    TARGETS imgui
+    TARGETS imgui imgui_intermediate
     EXPORT imgui
     RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT runtime
     LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT runtime
     ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT dev
     PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}" COMPONENT dev
 )
-install(TARGET imgui DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
-)
+
+# install(TARGET imgui DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+# )
 install(
     FILES ${IMPLOT_HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
@@ -137,9 +138,3 @@ install(
 # # install(FILES ${IMGUI_HEADERS} # source directory
 # # DESTINATION external/include/imgui_intermediate# target directory
 # # )
-install(FILES ${IMPLOT_HEADERS} # source directory
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-)
-install(FILES ${IMGUI_HEADERS} # source directory
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} # target directory
-)
