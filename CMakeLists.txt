@@ -84,24 +84,21 @@ add_library(imgui_intermediate INTERFACE IMPORTED GLOBAL ${IMPLOT_SOURCES} implo
 
 # target_include_directories(${_ARGS_LIB_NAME} INTERFACE .)
 # target_link_libraries(${_ARGS_LIB_NAME} INTERFACE ./lib)
-add_dependencies(imgui imgui_intermediate)
-add_dependencies(imgui_intermediate implot_utility)
+add_dependencies(imgui imgui_intermediate implot_utility)
 
+# add_dependencies(imgui_intermediate implot_utility)
 target_include_directories(imgui
     PRIVATE
         ./
         ${glfw_INCLUDEDIR}
     PUBLIC
         ${IMGUI_HEADERS}
-        $<INSTALL_INTERFACE:${IMGUI_HEADERS}/>
-        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/>
+        ${IMGUI_HEADERS}
 )
 target_include_directories(imgui_intermediate
     INTERFACE
         ./
         ${IMPLOT_HEADERS}
-        $<INSTALL_INTERFACE:${IMPLOT_HEADERS}/>
-        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/>
 )
 
 target_link_libraries(imgui
@@ -109,18 +106,6 @@ target_link_libraries(imgui
         glfw
 )
 
-# target_link_libraries(imgui_intermediate
-# INTERFACE
-# ${CMAKE_INSTALL_LIBDIR}/lib/*.lib
-# )
-# install(
-# TARGETS imgui
-# EXPORT imgui
-# RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT runtime
-# LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT runtime
-# ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT dev
-# PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}" COMPONENT dev
-# )
 install(TARGET imgui DESTINATION lib)
 install(FILES ${IMPLOT_HEADERS} DESTINATION include)
 install(FILES ${IMGUI_HEADERS} DESTINATION include)
