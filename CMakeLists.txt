@@ -105,8 +105,12 @@ target_link_libraries(imgui
     PRIVATE
         glfw
 )
+install(TARGETS imgui
+        RUNTIME DESTINATION bin
+        LIBRARY DESTINATION lib
+)
 
-install(EXPORT imgui DESTINATION lib)
+# install(TARGET imgui INCLUDES DESTINATION lib)
 install(FILES ${IMPLOT_HEADERS} DESTINATION include)
 install(FILES ${IMGUI_HEADERS} DESTINATION include)
 
