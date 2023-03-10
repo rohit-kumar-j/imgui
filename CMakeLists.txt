@@ -114,7 +114,7 @@ target_link_libraries(imgui
 # ${CMAKE_INSTALL_LIBDIR}/lib/*.lib
 # )
 install(
-    TARGETS imgui imgui_intermediate
+    TARGETS imgui
     EXPORT imgui
     RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT runtime
     LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT runtime
