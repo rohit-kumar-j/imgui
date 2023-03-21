@@ -62,7 +62,6 @@ add_library(imgui STATIC ${IMGUI_SOURCES})
 target_include_directories(imgui
     PRIVATE
         ${glfw_INCLUDEDIR}
-    PUBLIC
         ${IMGUI_HEADERS}
 )
 target_link_libraries(imgui
