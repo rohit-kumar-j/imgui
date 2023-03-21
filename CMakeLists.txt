@@ -25,7 +25,7 @@ execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SO
 execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp ${CMAKE_CURRENT_SOURCE_DIR})
 execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/backends/imgui_impl_glfw.h ${CMAKE_CURRENT_SOURCE_DIR})
 execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/backends/imgui_impl_opengl3.h ${CMAKE_CURRENT_SOURCE_DIR})
-execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/backends/imgui_impl_opengl3_loader.h ${CMAKE_CURRENT_SOURCE_DIR})
+# execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/backends/imgui_impl_opengl3_loader.h ${CMAKE_CURRENT_SOURCE_DIR})
 
 file(GLOB IMGUI_SOURCES
     implot.cpp
@@ -45,7 +45,7 @@ file(GLOB IMGUI_SOURCES
 file(GLOB IMGUI_HEADERS
     implot.h
     implot_internal.h
-
+    
     #
     imconfig.h
     imgui.h
@@ -55,7 +55,7 @@ file(GLOB IMGUI_HEADERS
     imstb_truetype.h
     imgui_impl_glfw.h
     imgui_impl_opengl3.h
-    imgui_impl_opengl3_loader.h
+    # imgui_impl_opengl3_loader.h
 )
 
 add_library(imgui STATIC ${IMGUI_SOURCES})
