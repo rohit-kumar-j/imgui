@@ -13,9 +13,9 @@ if(NOT glfw_POPULATED)
     add_subdirectory(${glfw_SOURCE_DIR} ${glfw_BINARY_DIR} EXCLUDE_FROM_ALL)
 endif()
 
-if(NOT IS_DIRECTORY implot)
-    execute_process(COMMAND git clone https://github.com/rohit-kumar-j/implot.git)
-endif()
+# if(NOT IS_DIRECTORY implot)
+execute_process(COMMAND git clone https://github.com/rohit-kumar-j/implot.git)
+# endif()
 
 execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/implot/implot.cpp ${CMAKE_CURRENT_SOURCE_DIR})
 execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/implot/implot_demo.cpp ${CMAKE_CURRENT_SOURCE_DIR})
