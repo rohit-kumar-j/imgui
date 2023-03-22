@@ -70,8 +70,11 @@ target_link_libraries(imgui
     PRIVATE
         glfw
 )
-
-set_target_properties(imgui PROPERTIES COMPILE_DEFINITIONS "IMGUI_IMPL_OPENGL_LOADER_GLAD")
+target_compile_options(imgui 
+    PRIVATE
+        /define:IMGUI_IMPL_OPENGL_LOADER_GLAD
+)
+# set_target_properties(imgui PROPERTIES COMPILE_DEFINITIONS "IMGUI_IMPL_OPENGL_LOADER_GLAD")
 
 install(TARGETS imgui EXPORT imgui DESTINATION lib)
 install(FILES ${IMPLOT_HEADERS} DESTINATION include/imgui)
