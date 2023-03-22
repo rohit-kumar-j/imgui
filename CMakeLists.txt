@@ -71,6 +71,8 @@ target_link_libraries(imgui
         glfw
 )
 
+set_target_properties(imgui PROPERTIES COMPILE_DEFINITIONS "IMGUI_IMPL_OPENGL_LOADER_GLAD")
+
 install(TARGETS imgui EXPORT imgui DESTINATION lib)
 install(FILES ${IMPLOT_HEADERS} DESTINATION include/imgui)
 install(FILES ${IMGUI_HEADERS} DESTINATION include/imgui)
