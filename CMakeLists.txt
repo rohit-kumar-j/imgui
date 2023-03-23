@@ -5,7 +5,10 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DIMGUI_IMPL_OPENGL_LOADER_GLAD2")
 # quick and dirty cmake
 project(imgui CXX)
 include(FetchContent)
-FetchContent_Declare(glfw GIT_REPOSITORY https://github.com/glfw/glfw)
+FetchContent_Declare(glfw 
+    GIT_REPOSITORY https://github.com/glfw/glfw
+    GIT_TAG 3.3.8
+)
 FetchContent_GetProperties(glfw)
 
 if(NOT glfw_POPULATED)
