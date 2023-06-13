@@ -105,11 +105,15 @@ Other changes:
 
 - Tables: Fixed a regression in 1.89.6 leading to the first column of tables with either
   ScrollX or ScrollY flags from being impossible to resize. (#6503)
+- Debug Tools: Added 'io.ConfigDebugIniSettings' option to save .ini data with extra
+  comments. Currently mainly for inspecting Docking .ini data, but makes saving slower.
 
 Docking+Viewports Branch:
 
 - Docking: Fixed dragging from title-bar empty space (regression from 1.88 related to
   keeping ID alive when calling low-level ButtonBehavior() directly). (#5181, #2645)
+- Docking: [Internal] DockBuilderDockWindow() API calls don't clear docking order
+  if the target node is same as existing one.
 
 
 -----------------------------------------------------------------------
