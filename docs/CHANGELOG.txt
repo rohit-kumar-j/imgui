@@ -36,10 +36,26 @@ HOW TO UPDATE?
 - Please report any issue!
 
 -----------------------------------------------------------------------
- VERSION 1.91.2 WIP (In Progress)
+ VERSION 1.91.3 WIP (In Progress)
 -----------------------------------------------------------------------
 
 Breaking changes:
+
+Other changes:
+
+- Scrollbar: Shift+Click scroll to clicked location (pre-1.90.8 default). (#8002, #7328)
+- Scrollbar: added io.ConfigScrollbarScrollByPage setting (default to true). (#8002, #7328)
+  Set io.ConfigScrollbarScrollByPage=false to enforce always scrolling to clicked location.
+- Backends: SDL3: Update for API changes: SDL_bool removal. SDL_INIT_TIMER removal.
+
+Docking+Viewports Branch:
+
+
+-----------------------------------------------------------------------
+ VERSION 1.91.2 (Released 2024-09-19)
+-----------------------------------------------------------------------
+
+Decorated log and release notes: https://github.com/ocornut/imgui/releases/tag/v1.91.2
 
 Other changes:
 
@@ -54,7 +70,7 @@ Other changes:
   - I've been wanting to add this tool for a long time, but was stalled by finding a way to
     not make it spammy + make it practically zero cost. After @pthom made various proposals to
     solve the same problem (thanks for pushing me!), I decided it was time to finish it.
-  - Added ImGuiItemFlags_AllowDuplicateId to use with PushItemFlag/PopItemFlag() if for some
+  - Added ImGuiItemFlags_AllowDuplicateId to use with PushItemFlag()/PopItemFlag() if for some
     reason you intend to have duplicate identifiers.
   - (#74, #96, #480, #501, #647, #654, #719, #843, #894, #1057, #1173, #1390, #1414, #1556, #1768,
      #2041, #2116, #2330, #2475, #2562, #2667, #2807, #2885, #3102, #3375, #3526, #3964, #4008,
@@ -91,13 +107,13 @@ Docking+Viewports Branch:
 
 - Viewports: fixed an issue where a window manually constrained to the main viewport while crossing
   over main viewport bounds isn't translated properly. (#7985)
+- Backends: SDL2, SDL3, Win32: ensure that ImGuiPlatformMonitor list is available after backend Init call. (#7995)
 - Backends: Win32: fixed direct calls to platform_io.Platform_SetWindowPos()/Platform_SetWindowSize()
   on windows created by application (typically main viewport).
 - Backends: Win32: fixed an issue where a viewport destroyed while clicking would hog
   mouse tracking and temporary lead to incorrect update of HoveredWindow. (#7971)
 - Backends: SDL3: added support for viewport->ParentViewportId field to support parenting
-  windows at OS level. (#7973) [@RT2code]
-- Backends: SDL3: rework implementation of _NoTaskBarIcon. (#7989) [@RT2code]
+  windows at OS level. (#7973, #7989) [@RT2code]
 
 -----------------------------------------------------------------------
  VERSION 1.91.1 (Released 2024-09-04)
